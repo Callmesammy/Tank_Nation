@@ -4,6 +4,8 @@ package tank_nation;
 import Standard_Page.Page_Component;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 //import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
@@ -23,6 +25,13 @@ public class Tank_ation extends JFrame{
         setLayout(new BorderLayout());
         Page_Component component = new Page_Component();
         add(component);
+        addWindowListener( new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+               component.Start();
+            }
+            
+        });
     }
     
     public static void main(String[] args) {

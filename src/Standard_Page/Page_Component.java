@@ -21,7 +21,18 @@ public class Page_Component extends JComponent{
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (start) {                    
+                while (start) {
+                    long startTime = System.nanoTime();
+                    Drawbackground();
+                    Drawgrame();
+                    renderer();
+                    long time = System.nanoTime() - startTime;
+                    if(time< TIME){
+                        long sleep =(TIME -time)/1000000;
+                         sleep(sleep); // for testing of speed 
+                         System.out.println(sleep);
+                    }
+                   
                     
                 }
             }
@@ -29,6 +40,26 @@ public class Page_Component extends JComponent{
         thread.start();;
     }
     
-    private void sleep 
+    private void Drawbackground(){
+        
+    }
+    
+    private void Drawgrame(){
+        
+    }
+    
+    private void renderer(){
+        
+    }
+    
+    private void sleep (long speed){
+        try{
+              thread.sleep(speed);
+        }catch(InterruptedException e){
+            System.err.println(e);
+        }
+      
+        
+    }
     
 }
