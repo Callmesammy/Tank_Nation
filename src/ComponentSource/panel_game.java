@@ -1,6 +1,11 @@
 
 package ComponentSource;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 /**
@@ -8,6 +13,9 @@ import javax.swing.JComponent;
  * @author user
  */
 public class panel_game extends JComponent{
+    
+    private Graphics2D gd;
+     private BufferedImage bf; 
     
     private final int FPS = 60;
     private final int START_GAME = 1000000000/FPS;
@@ -20,6 +28,11 @@ public class panel_game extends JComponent{
     public void start(){
         width = getWidth();
         height = getHeight();
+         bf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        gd = bf.createGraphics();
+        gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -44,6 +57,11 @@ public class panel_game extends JComponent{
 }
     
     private void drawBackground(){
+        gd.setColor(new Color(30,30,30));
+          gd.fillRect(0, 0, width, height);
+
+        
+       
         
     }
     
@@ -52,6 +70,9 @@ public class panel_game extends JComponent{
     }
     
     private void renderer(){
+        Graphics cd = getGraphics();
+        cd.drawImage(bf, 0, 0, null);
+        cd.dispose();
         
     }
     private void stop (long speed){
