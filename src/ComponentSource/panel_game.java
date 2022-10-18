@@ -46,7 +46,7 @@ public class panel_game extends JComponent{
                    if (time < START_GAME) {
                        long sleep = (START_GAME -time)/1000000;
                         stop(sleep);
-                        System.out.println(sleep); // for Testing 
+                      
                    }
                   
                    
