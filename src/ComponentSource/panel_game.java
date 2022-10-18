@@ -9,56 +9,56 @@ import javax.swing.JComponent;
  */
 public class panel_game extends JComponent{
     
-    private final int FPS = 16;
-    private final int START_GAME = 1000000000;
+    private final int FPS = 60;
+    private final int START_GAME = 1000000000/FPS;
+    private boolean started = true;
+    private Thread thread; 
     private int width;
     private int height;
-    private Thread thread;
-    private boolean start;
-
-    public panel_game() {
+    
+    
+    public void start(){
         width = getWidth();
         height = getHeight();
-        
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (start) {                    
-               long STARTTIME = System.nanoTime();
-                drawBackground();
-                drawShpe();
-                renderer();
-               long time = System.nanoTime() - STARTTIME;
-                    if (time <STARTTIME) {
-                        SLOW(time);
-                        System.out.println(time); //test
-                    }
-                }
+               while(started){
+                   long starttime = System.nanoTime();
+                   drawBackground();
+                   drawGame();
+                   renderer();
+                   long time = System.nanoTime() - starttime;
+                   
+                   if (time < START_GAME) {
+                       long sleep = (START_GAME -time)/1000000;
+                        stop(sleep);
+                        System.out.println(sleep); // for Testing 
+                   }
                   
-              
+                   
+               }
             }
         });
-        thread.start();
-        
-    }
+    thread.start();
+}
     
     private void drawBackground(){
         
     }
     
-    private void drawShpe(){
+    private void drawGame(){
         
     }
     
     private void renderer(){
         
     }
-    private void SLOW(long speed){
+    private void stop (long speed){
         try {
-               thread.sleep(speed);
+            Thread.sleep(speed);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
-    
 }
