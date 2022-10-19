@@ -1,6 +1,7 @@
 
 package ComponentSource;
 
+import Object.packa.Game_Panel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,7 +17,7 @@ public class panel_game extends JComponent{
     
     private Graphics2D gd;
      private BufferedImage bf; 
-    
+    private Game_Panel player;
     private final int FPS = 60;
     private final int START_GAME = 1000000000/FPS;
     private boolean started = true;
@@ -54,8 +55,11 @@ public class panel_game extends JComponent{
             }
         });
     thread.start();
+    playerGame();
 }
-    
+    private void playerGame(){
+        player = new Game_Panel();
+    }
     private void drawBackground(){
         gd.setColor(new Color(30,30,30));
           gd.fillRect(0, 0, width, height);
@@ -66,6 +70,7 @@ public class panel_game extends JComponent{
     }
     
     private void drawGame(){
+       player.drawImage(gd);
         
     }
     

@@ -1,18 +1,20 @@
 
 package Object.packa;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 
 
 public class Game_Panel {
 
     public Game_Panel() {
-        this.XImage = new ImageIcon(getClass().getResource("/TankPics/tankB.png")).getImage();
-        this.YImage_speed = new ImageIcon(getClass().getResource("/TankPics/tankA.png")).getImage();
+        this.XImage = new ImageIcon(getClass().getResource("/tank/pic/tankB.png")).getImage();
+        this.YImage_speed = new ImageIcon(getClass().getResource("/tank/pic/tankA.png")).getImage();
     }
 
-    private void drawImage(float angle){
+    public void chagedraw(float angle){
         if (angle<0) {
             angle = 359;
         }else if (angle>359){
@@ -20,18 +22,26 @@ public class Game_Panel {
         }
         
     }
+    public void drawImage(Graphics2D g2){
+        AffineTransform trans = g2.getTransform();
+        g2.translate(x, y);
+        g2.drawImage(YImage_speed, 0, 0, null);
+        g2.setTransform(trans);
+    }
     
-    private double getX(){
+    public double getX(){
         return x;
     }
     
-    private double getY(){
+    public double getY(){
         return y;
     }
     
-    private double getAngle(){
+    public float getAngle(){
         return angle;
     }
+    
+     
     private static double Game_Size = 64;
     private double x;
     private double y;
