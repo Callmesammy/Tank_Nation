@@ -15,9 +15,9 @@ import javax.swing.JComponent;
  */
 public class panel_game extends JComponent{
     
-    private Graphics2D gd;
-     private BufferedImage bf; 
-    private Game_Panel player;
+    private Graphics2D g2;
+     private BufferedImage image; 
+   
     private final int FPS = 60;
     private final int START_GAME = 1000000000/FPS;
     private boolean started = true;
@@ -25,14 +25,15 @@ public class panel_game extends JComponent{
     private int width;
     private int height;
     
-    
+     public Game_Panel playet;
+     
     public void start(){
         width = getWidth();
         height = getHeight();
-         bf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        gd = bf.createGraphics();
-        gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        g2 = image.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         
         thread = new Thread(new Runnable() {
             @Override
@@ -58,25 +59,22 @@ public class panel_game extends JComponent{
     playerGame();
 }
     private void playerGame(){
-        player = new Game_Panel();
+        playet = new Game_Panel();
     }
     private void drawBackground(){
-        gd.setColor(new Color(30,30,30));
-          gd.fillRect(0, 0, width, height);
+        g2.setColor(new Color(30,30,30));
+          g2.fillRect(0, 0, width, height);
 
-        
-       
-        
     }
     
     private void drawGame(){
-       player.drawImage(gd);
+       playet.draw(g2);
         
     }
     
     private void renderer(){
         Graphics cd = getGraphics();
-        cd.drawImage(bf, 0, 0, null);
+        cd.drawImage(image, 0, 0, null);
         cd.dispose();
         
     }
